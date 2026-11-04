@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Màn Hình Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Khung màn hình Game chính */
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background: #111;
+            border: 4px solid #00d2ff;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Màn hình Start Menu */
+        .menu-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #00d2ff;
+            text-shadow: 0 0 15px #00d2ff;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 200px;
+        }
+
+        /* Styling cho các nút bấm */
+        .btn {
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            background: transparent;
+            border: 2px solid #00d2ff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: #00d2ff;
+            color: #000;
+            box-shadow: 0 0 15px #00d2ff;
+            transform: translateY(-2px);
+        }
+
+        /* Màn hình chơi game (Mặc định ẩn) */
+        #play-screen {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #play-screen h2 {
+            font-size: 2rem;
+            color: #00ff88;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- 1. Màn hình Chờ / Start Menu -->
+        <div id="menu-screen" class="menu-screen">
+            <h1 class="title">My Cool Game</h1>
+            <div class="btn-group">
+                <button class="btn" onclick="startGame()">Bắt đầu</button>
+                <button class="btn" onclick="alert('Tính năng đang phát triển!')">Cài đặt</button>
+                <button class="btn" onclick="alert('Cảm ơn bạn đã chơi!')">Thoát</button>
+            </div>
+        </div>
+
+        <!-- 2. Màn hình Chơi Game (Ẩn lúc đầu) -->
+        <div id="play-screen">
+            <h2>Trò chơi đang diễn ra...</h2>
+            <button class="btn" onclick="backToMenu()">Quay lại Menu</button>
+        </div>
+    </div>
+
+    <script>
+        // Hàm bắt đầu game
+        function startGame() {
+            document.getElementById('menu-screen').style.display = 'none';
+            document.getElementById('play-screen').style.display = 'flex';
+        }
+
+        // Hàm quay lại menu chính
+        function backToMenu() {
+            document.getElementById('play-screen').style.display = 'none';
+            document.getElementById('menu-screen').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
