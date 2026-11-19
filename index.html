@@ -14,7 +14,7 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 .c0{left:37.7%}.c1{left:11.3%}.c2{left:64.3%}
 .slot.ok{background:#ffe27a33;box-shadow:0 0 0 .6cqw #ffe27a;animation:pu 1s infinite alternate}
 @keyframes pu{to{background:#ffe27a66}}
-.mon{position:relative;width:88%;height:84%;background:linear-gradient(#2e3f2c,#17221a);border:.5cqw solid var(--gold);border-radius:1.6cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;padding:.8cqw 0 4.5cqw;font-size:2.5cqw;text-align:center;box-shadow:0 .5cqw 1.5cqw #000a}
+.mon{position:relative;width:100%;height:84%;background:linear-gradient(#2e3f2c,#17221a);border:.5cqw solid var(--gold);border-radius:1.6cqw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw;padding:.8cqw 0 4.5cqw;font-size:2.5cqw;text-align:center;box-shadow:0 .5cqw 1.5cqw #000a}
 .o .mon{border-color:var(--red)}
 .mon b{font-size:8cqw;line-height:1;font-weight:400}
 .mon i{font-style:normal;font-weight:700}
@@ -103,7 +103,7 @@ function render(){
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
   if(m)d.innerHTML=`<div class="mon"><u class="at${m.r?' rg':''}">${m.a}</u><u class="hp">${m.h}</u>${m.s>0?`<u class="sh">🛡️${m.s}</u>`:''}<b>${m.e}</b><span>${sk(m)}</span></div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i,a)=>`<div class="cd ${c.y=='i'?'it':''} ${i&&a[i-1].y==c.y?'ov':i?'gp':''} ${G.sel===i?'sel':''} ${c.c>G.en?'dim':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i,a)=>`<div class="cd ${c.y=='i'?'it':''} ${i&&a[i-1].y==c.y?'ov':i?'gp':''} ${G.sel===i?'sel':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
  $('#h1').innerHTML=side('o','Địch');$('#h2').innerHTML=side('p','Bạn');
  $('#en').textContent=`⚡ ${G.en}`;$('#end').disabled=G.busy}
