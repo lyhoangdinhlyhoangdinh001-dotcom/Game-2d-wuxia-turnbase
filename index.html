@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Card Monsters – Đấu trường rừng xanh</title>
 <style>
-:root{--hp-y:1.4cqw;--heart:url(Assets/UI/heart_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
+:root{--hp-y:.9cqw;--heart:url(Assets/UI/heart_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0;background:#0b140e;color:#fff;font-family:"Trebuchet MS",system-ui,sans-serif}
 body{display:flex;justify-content:center;align-items:center;overflow:hidden}
@@ -21,7 +21,7 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 
 .mon u{text-decoration:none;font-weight:700}
 .mon .at,.mon .hp{position:absolute;bottom:.6cqw;font-size:3cqw}
-.mon .hp{font-size:4cqw}
+.mon .hp{font-size:2.6cqw}
 .mon .at{left:.8cqw}.mon .hp{right:-.5cqw;bottom:-.5cqw}
 .mon .sh{position:absolute;right:-.1cqw;bottom:6.3cqw;font-size:3cqw}
 .mon span{position:absolute;top:-6cqw;left:50%;transform:translateX(-50%);display:flex;gap:1.2cqw}
@@ -35,7 +35,7 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 .cd b{font-size:7cqw;line-height:1;font-weight:400}
 .cd i{font-style:normal;font-weight:700}
 .cd u{position:absolute;bottom:.8cqw;font-size:2.8cqw;font-weight:700;text-decoration:none}
-.cd .at{left:1cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:4cqw}
+.cd .at{left:1cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:2.6cqw}
 .hxs{display:flex;gap:.7cqw;justify-content:center}
 .cd .hx{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:5.8cqw;height:6.4cqw;font-style:normal;font-size:3.4cqw;line-height:1}
 .cd .hx::after{content:"";position:absolute;inset:0;z-index:-2;background:#6b5420;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
@@ -53,7 +53,7 @@ button:disabled{opacity:.45}
 #mu{padding:1cqw 2.5cqw}
 #ov{position:absolute;inset:0;background:#000c;display:none;flex-direction:column;align-items:center;justify-content:center;font-size:8cqw;gap:4cqw;z-index:9;text-align:center}
 #ov button{font-size:5cqw}
-.hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding-bottom:var(--hp-y);width:7.2cqw;height:6.8cqw;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
+.hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding-bottom:var(--hp-y);width:7.2cqw;height:6.8cqw;color:#fff;font-weight:800;text-shadow:-.2cqw 0 #000,.2cqw 0 #000,0 -.2cqw #000,0 .2cqw #000,-.17cqw -.17cqw #000,.17cqw -.17cqw #000,-.17cqw .17cqw #000,.17cqw .17cqw #000}
 .hp::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--heart) center/contain no-repeat}
 @media (prefers-reduced-motion:reduce){.slot.ok,.fl{animation:none}}
 </style></head><body>
