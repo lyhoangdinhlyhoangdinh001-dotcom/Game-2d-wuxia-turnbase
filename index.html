@@ -23,7 +23,7 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 .mon .at,.mon .hp{position:absolute;bottom:.6cqw;font-size:3cqw}
 .mon .hp{font-size:3.6cqw}
 .mon .at{left:-.5cqw;bottom:-.5cqw;font-size:4.6cqw}.mon .hp{right:-.5cqw;bottom:-.5cqw}
-.mon .sh{position:absolute;right:-2.4cqw;bottom:4cqw;width:7cqw;height:7cqw;display:flex;align-items:center;justify-content:center;font-size:7cqw;line-height:1}
+.mon .sh{position:absolute;left:50%;bottom:100%;margin-bottom:.3cqw;transform:translateX(-50%);width:7cqw;height:7cqw;display:flex;align-items:center;justify-content:center;font-size:7cqw;line-height:1}
 .mon .sh i{position:absolute;left:50%;top:50%;transform:translate(-50%,-45%);font-size:3.6cqw;line-height:1;font-weight:700;color:#fff;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
 .mon span{position:absolute;top:-6cqw;left:50%;transform:translateX(-50%);display:flex;gap:1.2cqw}
 .mon .sk{position:relative;font-size:5cqw;line-height:1}
@@ -102,7 +102,7 @@ const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','✋']].filter(([k])=>c[
 function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
-  if(m)d.innerHTML=`<div class="mon"><u class="at${m.r?' rg':''}">${m.a}</u><u class="hp">${m.h}</u>${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}<b>${m.e}</b><span>${sk(m)}</span></div>`;
+  if(m)d.innerHTML=`<div class="mon"><u class="at${m.r?' rg':''}">${m.a}</u><u class="hp">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span></div>`;
   el.appendChild(d)})}
  $('#hand').innerHTML=G.p.hand.map((c,i,a)=>`<div class="cd ${c.y=='i'?'it':''} ${i&&a[i-1].y==c.y?'ov':i?'gp':''} ${G.sel===i?'sel':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
