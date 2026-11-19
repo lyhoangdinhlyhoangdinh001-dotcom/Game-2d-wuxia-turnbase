@@ -115,7 +115,7 @@ function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
   if(k=='p'&&G.sac&&m)d.classList.add('so');
-  if(m)d.innerHTML=`<div class="mon">${(ok=>`<u class="at${isR(m)?' rg':''}${ok?'':' off'}${m.sw>0?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}">${dmg(m)}${ok?'':'<s>✕</s>'}</u>`)(canAtk(m,i))}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
+  if(m)d.innerHTML=`<div class="mon">${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
   el.appendChild(d)})}
  $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
@@ -123,15 +123,15 @@ function render(){
  $('#en').textContent=`⚡ ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),900)}
 function hit(x,d){if(x.b>0){x.b--;return'Chặn!'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
-const isR=m=>m.r&&!(m.sw>0),dmg=m=>m.r&&m.sw>0?m.sw:m.a;
-const canAtk=(m,i)=>isR(m)?i>0:i==0;
+const atks=m=>{const l=[{r:!!m.r,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.r?i>0:i==0;
+const canAtk=(m,i)=>atks(m).some(a=>act(a,i));
 const compact=B=>{const a=B.filter(Boolean);while(a.length<3)a.push(null);B.splice(0,3,...a)};
 const clean=()=>['p','o'].forEach(k=>{const B=G[k].board;B.forEach((m,j)=>{if(m&&m.h<=0){B[j]=null;sfx('die')}});compact(B)});
 async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
  for(const m of[...S.board]){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
-  const rg=isR(m),j=rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
-  const tx=hit(t,dmg(m));let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.e+' '+m.n+' đánh '+t.e+' '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
+  const at=atks(m).find(a=>act(a,i)),rg=at.r,j=rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
+  const tx=hit(t,at.d);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.e+' '+m.n+' đánh '+t.e+' '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
   await sleep(700);clean();render()}
  return lost('o')||lost('p')}
