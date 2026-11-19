@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Card Monsters – Đấu trường rừng xanh</title>
 <style>
-:root{--hp-y:1cqw;--heart:url(Assets/UI/heart_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
+:root{--hp-y:0cqw;--heart:url(Assets/UI/heart_icon.png);--atk:url(Assets/UI/attack_icon.png);--sword:url(Assets/UI/sword_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0;background:#0b140e;color:#fff;font-family:"Trebuchet MS",system-ui,sans-serif}
 body{display:flex;justify-content:center;align-items:center;overflow:hidden}
@@ -21,8 +21,8 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 
 .mon u{text-decoration:none;font-weight:700}
 .mon .at,.mon .hp{position:absolute;bottom:.6cqw;font-size:3cqw}
-.mon .hp{font-size:4cqw}
-.mon .at{left:.8cqw}.mon .hp{right:-.5cqw;bottom:-.5cqw}
+.mon .hp{font-size:3.6cqw}
+.mon .at{left:-.5cqw;bottom:-.5cqw;font-size:4.6cqw}.mon .hp{right:-.5cqw;bottom:-.5cqw}
 .mon .sh{position:absolute;right:-.1cqw;bottom:6.3cqw;font-size:3cqw}
 .mon span{position:absolute;top:-6cqw;left:50%;transform:translateX(-50%);display:flex;gap:1.2cqw}
 .mon .sk{position:relative;font-size:5cqw;line-height:1}
@@ -30,12 +30,12 @@ body{display:flex;justify-content:center;align-items:center;overflow:hidden}
 .fl{position:absolute;top:10%;left:-20%;right:-20%;text-align:center;font-weight:800;font-size:4cqw;color:#ff8a78;text-shadow:0 0 .6cqw #000,0 0 .6cqw #000,0 0 .6cqw #000;animation:fl .9s forwards;pointer-events:none;z-index:5}
 @keyframes fl{to{transform:translateY(-6cqw);opacity:0}}
 .go .mon{transform:scale(1.08);transition:transform .15s}
-#hand{position:absolute;left:3%;right:3%;top:69%;height:21%;display:flex;gap:1.5cqw;overflow-x:auto;padding:3cqw 1cqw 1cqw}
+#hand{position:absolute;left:3%;right:3%;top:69%;height:21%;display:flex;gap:1.5cqw;overflow-x:auto;padding:3cqw 1cqw 1cqw 2.2cqw}
 .cd{flex:0 0 21cqw;background:linear-gradient(#f3e6c4,#d6c28f);color:var(--ink);border:.5cqw solid #6b5420;border-radius:1.6cqw;font-size:2.4cqw;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.2cqw .5cqw 7cqw;position:relative;cursor:pointer;box-shadow:0 .5cqw 1.2cqw #0008}
 .cd b{font-size:7cqw;line-height:1;font-weight:400}
 .cd i{font-style:normal;font-weight:700}
 .cd u{position:absolute;bottom:.8cqw;font-size:2.8cqw;font-weight:700;text-decoration:none}
-.cd .at{left:1cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:4cqw}
+.cd .at{left:-.5cqw;bottom:-.5cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:3.6cqw}
 .hxs{display:flex;gap:.7cqw;justify-content:center}
 .cd .hx{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:5.8cqw;height:6.4cqw;font-style:normal;font-size:3.4cqw;line-height:1}
 .cd .hx::after{content:"";position:absolute;inset:0;z-index:-2;background:#6b5420;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
@@ -53,8 +53,12 @@ button:disabled{opacity:.45}
 #mu{padding:1cqw 2.5cqw}
 #ov{position:absolute;inset:0;background:#000c;display:none;flex-direction:column;align-items:center;justify-content:center;font-size:8cqw;gap:4cqw;z-index:9;text-align:center}
 #ov button{font-size:5cqw}
-.hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding-bottom:var(--hp-y);width:7.2cqw;height:6.8cqw;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
-.hp::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--heart) center/10.3cqw 10.3cqw no-repeat}
+u.at{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding-bottom:.3cqw;width:6.4cqw;height:6.4cqw;font-size:4.6cqw;line-height:1;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
+u.at::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--atk) center/contain no-repeat}
+u.at:not(.rg)::after{content:"";position:absolute;left:-.6cqw;top:-.95cqw;width:3.8cqw;height:3.8cqw;z-index:-1;background:var(--sword) center/contain no-repeat}
+u.at.rg::after{content:"🏹";position:absolute;top:-2.2cqw;left:-.4cqw;font-size:3.2cqw;line-height:1;text-shadow:none}
+.hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:.4cqw 0 var(--hp-y);width:6.4cqw;height:6cqw;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
+.hp::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--heart) center/8.8cqw 8.8cqw no-repeat}
 @media (prefers-reduced-motion:reduce){.slot.ok,.fl{animation:none}}
 </style></head><body>
 <div id="board">
@@ -90,9 +94,9 @@ const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','✋']].filter(([k])=>c[
 function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
-  if(m)d.innerHTML=`<div class="mon"><u class="at">${m.r?'🏹':'⚔️'}${m.a}</u><u class="hp">${m.h}</u>${m.s>0?`<u class="sh">🛡️${m.s}</u>`:''}<b>${m.e}</b><span>${sk(m)}</span></div>`;
+  if(m)d.innerHTML=`<div class="mon"><u class="at${m.r?' rg':''}">${m.a}</u><u class="hp">${m.h}</u>${m.s>0?`<u class="sh">🛡️${m.s}</u>`:''}<b>${m.e}</b><span>${sk(m)}</span></div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i)=>`<div class="cd ${c.y=='i'?'it':''} ${G.sel===i?'sel':''} ${c.c>G.en?'dim':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at">${c.r?'🏹':'⚔️'}${c.a}</u><u class="hp">${c.h}</u>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i)=>`<div class="cd ${c.y=='i'?'it':''} ${G.sel===i?'sel':''} ${c.c>G.en?'dim':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:''}</div>`).join('');
  const hp=k=>G[k].board.reduce((a,m)=>a+(m?m.h:0),0);
  $('#h1').textContent=`Địch: ❤️${hp('o')}`;$('#h2').textContent=`Lượt ${G.turn}/12`;
  $('#en').textContent=`⚡ ${G.en}/3`;$('#end').disabled=G.busy}
