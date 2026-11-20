@@ -72,6 +72,8 @@ u.at{isolation:isolate;display:flex;align-items:center;justify-content:center;bo
 u.at::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--atk) center/contain no-repeat}
 u.at:not(.rg)::after{content:"";position:absolute;left:-.6cqw;top:-0.29cqw;width:3.8cqw;height:3.8cqw;z-index:-1;background:var(--sword) center/contain no-repeat}
 u.at s{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#ff2a2a;font-size:4cqw;font-weight:900;line-height:1;text-shadow:-.2cqw 0 #1a0d0d,.2cqw 0 #1a0d0d,0 -.2cqw #1a0d0d,0 .2cqw #1a0d0d}
+u.at.hl::after{display:none}
+.cd .at.hl{left:auto;right:-.5cqw}
 u.at.rg::after{content:"";position:absolute;left:-1.2cqw;top:-.89cqw;width:5cqw;height:5cqw;z-index:-1;background:var(--bow) center/contain no-repeat}
 .hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:.4cqw 0 var(--hp-y);width:6.4cqw;height:6cqw;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
 .hp::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--heart) center/8.8cqw 8.8cqw no-repeat}
@@ -116,7 +118,7 @@ function render(){
   if(k=='p'&&G.sac&&m)d.classList.add('so');
   if(m)d.innerHTML=`<div class="mon">${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
  $('#h1').innerHTML=side('o','Địch');$('#h2').innerHTML=side('p','Bạn');
  $('#en').textContent=`⚡ ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
