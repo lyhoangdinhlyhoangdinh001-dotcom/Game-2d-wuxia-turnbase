@@ -40,7 +40,7 @@ u.at.lo,.hp.lo{color:#ff5a4a}u.at.hi,.hp.hi{color:#6fe36f}
 .cd .at{left:-.5cqw;bottom:-.5cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:3.6cqw}
 .hxs{display:flex;gap:.7cqw;justify-content:center}
 .cd .shd{position:absolute;right:0;bottom:0;width:6cqw;height:6cqw;display:flex;align-items:center;justify-content:center;font-size:6cqw;line-height:1}
-.bi{display:inline-block;width:1em;height:1em;background:var(--block) center/contain no-repeat}
+.bi{display:inline-block;vertical-align:top;width:1em;height:1em;background:var(--block) center/contain no-repeat}
 .cd .hx .bi{width:3.8cqw;height:3.8cqw}
 .cd .shd i{position:absolute;left:50%;top:50%;transform:translate(-50%,-45%);font-size:3.6cqw;line-height:1;font-weight:700;color:#fff;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
 .cd .hx{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;width:5.8cqw;height:6.4cqw;font-style:normal;font-size:3.4cqw;line-height:1}
@@ -113,8 +113,8 @@ function useCard(S,hi,ti){const c=S.hand[hi],m=S.board[ti];if(c.y=='m'){let e=ti
 const lost=k=>{const S=G[k];return !S.board.some(Boolean)&&!S.hand.some(c=>c&&c.y=='m')&&!S.dm.length};
 function start(){G={p:newSide(),o:newSide(),en:3,oen:3,turn:1,sel:null,sac:false,sd:false,busy:false,lg:['— Lượt 1 —']};$('#ov').style.display='none';$('#lgp').style.display='none';render()}
 const valid=i=>{const c=G.p.hand[G.sel];return c&&c.c<=G.en&&(c.y=='m'?(n=>n>=0&&i<=n)(G.p.board.findIndex(x=>!x)):!!G.p.board[i])};
-const sk=m=>[['t','🌵'],['b','<span class="bi"></span>']].filter(([k])=>m[k]>0).map(([k,e])=>`<u class="sk">${e}<i>${m[k]}</i></u>`).join('');
-const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','<span class="bi"></span>']].filter(([k])=>c[k]>0);return`<span class="hxs">${[0,1,2].map(n=>l[n]?`<em class="hx sk">${l[n][1]}<i>${c[l[n][0]]}</i></em>`:`<em class="hx e"></em>`).join('')}</span>`};
+const sk=m=>[['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>m[k]>0).map(([k,e])=>`<u class="sk">${e}<i>${m[k]}</i></u>`).join('');
+const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>c[k]>0);return`<span class="hxs">${[0,1,2].map(n=>l[n]?`<em class="hx sk">${l[n][1]}<i>${c[l[n][0]]}</i></em>`:`<em class="hx e"></em>`).join('')}</span>`};
 const hp=i=>i==0?'':i==2?'gp':'ov';
 function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
