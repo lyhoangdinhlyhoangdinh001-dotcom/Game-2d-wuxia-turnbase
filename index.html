@@ -1,8 +1,8 @@
 <!DOCTYPE html><html lang="vi"><head>
-<link rel="preload" as="image" href="Assets/UI/attack_icon.png"><link rel="preload" as="image" href="Assets/UI/block_icon.png"><link rel="preload" as="image" href="Assets/UI/bow_icon.png"><link rel="preload" as="image" href="Assets/UI/heal_icon.png"><link rel="preload" as="image" href="Assets/UI/heart_icon.png"><link rel="preload" as="image" href="Assets/UI/sword_icon.png">
+<link rel="preload" as="image" href="Assets/UI/attack_icon.png"><link rel="preload" as="image" href="Assets/UI/block_icon.png"><link rel="preload" as="image" href="Assets/UI/bow_icon.png"><link rel="preload" as="image" href="Assets/UI/heal_icon.png"><link rel="preload" as="image" href="Assets/UI/heart_icon.png"><link rel="preload" as="image" href="Assets/UI/sword_icon.png"><link rel="preload" as="image" href="Assets/UI/mana_icon.png">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Card Monsters – Đấu trường rừng xanh</title>
 <style>
-:root{--hp-y:0cqw;--heart:url(Assets/UI/heart_icon.png);--atk:url(Assets/UI/attack_icon.png);--sword:url(Assets/UI/sword_icon.png);--heal:url(Assets/UI/heal_icon.png);--block:url(Assets/UI/block_icon.png);--bow:url(Assets/UI/bow_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
+:root{--hp-y:0cqw;--heart:url(Assets/UI/heart_icon.png);--atk:url(Assets/UI/attack_icon.png);--sword:url(Assets/UI/sword_icon.png);--heal:url(Assets/UI/heal_icon.png);--block:url(Assets/UI/block_icon.png);--mana:url(Assets/UI/mana_icon.png);--bow:url(Assets/UI/bow_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 html,body{height:100%;margin:0;background:#0b140e;color:#fff;font-family:"Trebuchet MS",system-ui,sans-serif}
 body{display:flex;justify-content:center;align-items:center;overflow:hidden}
@@ -38,10 +38,12 @@ u.at.lo,.hp.lo{color:#ff5a4a}u.at.hi,.hp.hi{color:#6fe36f}
 .cd{flex:0 0 28cqw;background:linear-gradient(#f3e6c4,#d6c28f);color:var(--ink);border:.5cqw solid #6b5420;border-radius:1.6cqw;font-size:2.4cqw;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:1.2cqw .5cqw 7cqw;position:relative;cursor:pointer;box-shadow:0 .5cqw 1.2cqw #0008}
 .cd b{font-size:7cqw;line-height:1;font-weight:400}
 .cd i{font-style:normal;font-weight:700}
+.cd>i{width:100%;box-sizing:border-box;padding:0 3.6cqw;line-height:1.1}
 .cd u{position:absolute;bottom:.8cqw;font-size:2.8cqw;font-weight:700;text-decoration:none}
 .cd .at{left:-.5cqw;bottom:-.5cqw}.cd .hp{right:-.5cqw;bottom:-.5cqw;font-size:3.6cqw}
 .hxs{display:flex;gap:.7cqw;justify-content:center;min-height:6.4cqw}
 .cd .shd{position:absolute;right:0;bottom:0;width:6cqw;height:6cqw;display:flex;align-items:center;justify-content:center;font-size:6cqw;line-height:1}
+.mi{display:inline-block;vertical-align:middle;width:.7em;height:1.15em;background:var(--mana) center/contain no-repeat}
 .bi{display:inline-block;vertical-align:top;width:1em;height:1em;background:var(--block) center/contain no-repeat}
 .cd .hx .bi{width:3.8cqw;height:3.8cqw}
 .cd .shd i{position:absolute;left:50%;top:50%;transform:translate(-50%,-45%);font-size:3.6cqw;line-height:1;font-weight:700;color:#fff;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
@@ -60,7 +62,7 @@ u.at.lo,.hp.lo{color:#ff5a4a}u.at.hi,.hp.hi{color:#6fe36f}
 #sac{padding:1cqw 2.5cqw}
 .cd.sel{transform:translateY(-2.5cqw);box-shadow:0 0 2cqw #ffe27a;z-index:5}
 .cd.dim{opacity:.5}
-.co{position:absolute;top:-1.2cqw;left:-1.2cqw;background:#3a6fd0;color:#fff;border-radius:50%;width:5cqw;height:5cqw;line-height:5cqw;font-weight:700;font-size:3cqw}
+.co{position:absolute;top:-1.4cqw;left:-1.2cqw;width:5cqw;height:8.5cqw;background:var(--mana) center/contain no-repeat;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:3.6cqw;line-height:1;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
 #bar{top:91.5%;display:flex;justify-content:space-between;align-items:center;font-size:3.2cqw}
 button{font:inherit;font-weight:700;background:linear-gradient(#e6c66a,#b8913a);color:var(--ink);border:.4cqw solid #6b5420;border-radius:2cqw;padding:1cqw 4cqw;cursor:pointer}
 button:disabled{opacity:.45}
@@ -95,7 +97,7 @@ u.at.rg::after{content:"";position:absolute;left:-1.2cqw;top:-.89cqw;width:5cqw;
 <div id="lgp"><h2>Nhật ký</h2><div id="lgl"></div><button id="lgx">Đóng</button></div>
 </div>
 <script>
-['attack','block','bow','heal','heart','sword'].forEach(n=>{const m=new Image();m.src='Assets/UI/'+n+'_icon.png';m.decode&&m.decode().catch(()=>{})});
+['attack','block','bow','heal','heart','sword','mana'].forEach(n=>{const m=new Image();m.src='Assets/UI/'+n+'_icon.png';m.decode&&m.decode().catch(()=>{})});
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=a=>a[Math.random()*a.length|0];
 const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const M=[{n:'Sói rừng',e:'🐺',c:1,a:3,h:5},{n:'Gấu đá',e:'🐻',c:2,a:3,h:9},{n:'Nhím gai',e:'🦔',c:2,a:2,h:6,t:2},{n:'Rùa khiên',e:'🐢',c:2,a:2,h:6,s:3},{n:'Cáo cung',e:'🦊',c:1,a:2,h:4,r:1},{n:'Cú phép',e:'🦉',c:2,a:3,h:5,r:1},{n:'Rồng con',e:'🐲',c:3,a:5,h:8}];
@@ -125,10 +127,10 @@ function render(){
   if(k=='p'&&G.sac&&m)d.classList.add('so');
   if(m)d.innerHTML=`<div class="mon">${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}" data-i="${i}"><span class="co">${c.c}</span><b>${c.e}</b><i>${c.n}</i>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd">${c.e}<i>${c.v}</i></span>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}" data-i="${i}"><span class="co">${c.c}</span><i>${c.n}</i><b>${c.e}</b>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd">${c.e}<i>${c.v}</i></span>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
  $('#h1').innerHTML=side('o','Địch');$('#h2').innerHTML=side('p','Bạn');
- $('#en').textContent=`⚡ ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
+ $('#en').innerHTML=`<em class="mi"></em> ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),900)}
 function hit(x,d){if(x.b>0){x.b--;return'Chặn!'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
 const atks=m=>{const l=[{r:!!m.r,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.r?i>0:i==0;
