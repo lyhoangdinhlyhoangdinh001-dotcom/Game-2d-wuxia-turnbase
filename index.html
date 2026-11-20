@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="vi"><head>
-<link rel="preload" as="image" href="Assets/UI/attack_icon.png"><link rel="preload" as="image" href="Assets/UI/block_icon.png"><link rel="preload" as="image" href="Assets/UI/bow_icon.png"><link rel="preload" as="image" href="Assets/UI/heal_icon.png"><link rel="preload" as="image" href="Assets/UI/heart_icon.png"><link rel="preload" as="image" href="Assets/UI/sword_icon.png"><link rel="preload" as="image" href="Assets/UI/mana_icon.png"><link rel="preload" as="image" href="Assets/Char/char_dieuthuyen.webp">
+<link rel="preload" as="image" href="Assets/UI/attack_icon.png"><link rel="preload" as="image" href="Assets/UI/block_icon.png"><link rel="preload" as="image" href="Assets/UI/bow_icon.png"><link rel="preload" as="image" href="Assets/UI/heal_icon.png"><link rel="preload" as="image" href="Assets/UI/heart_icon.png"><link rel="preload" as="image" href="Assets/UI/sword_icon.png"><link rel="preload" as="image" href="Assets/UI/mana_icon.png"><link rel="preload" as="image" href="Assets/Char/char_dieuthuyen.webp"><link rel="preload" as="image" href="Assets/Char/char_gcl.webp">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Card Monsters – Đấu trường rừng xanh</title>
 <style>
 :root{--hp-y:0cqw;--heart:url(Assets/UI/heart_icon.png);--atk:url(Assets/UI/attack_icon.png);--sword:url(Assets/UI/sword_icon.png);--heal:url(Assets/UI/heal_icon.png);--block:url(Assets/UI/block_icon.png);--mana:url(Assets/UI/mana_icon.png);--bow:url(Assets/UI/bow_icon.png);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark;--gold:#c9b57a;--red:#b86a6a;--ink:#2a2113}
@@ -58,9 +58,8 @@ u.at.lo,.hp.lo{color:#ff5a4a}u.at.hi,.hp.hi{color:#6fe36f}
 .mon .eq{position:absolute;left:50%;bottom:-.5cqw;transform:translateX(-50%);width:6cqw;height:6cqw;display:flex;align-items:center;justify-content:center;box-sizing:border-box;font-size:3.6cqw;line-height:1;background:#1a1408;border:.4cqw solid var(--gold);border-radius:50%;box-shadow:0 .3cqw .8cqw #000a}
 .cd.art{background:linear-gradient(#0007,#0000 28%,#0000 60%,#000a),var(--art) center/cover no-repeat;color:#fff}
 .cd.art>i{text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000}
-.cd.art>b{visibility:hidden}
 .mon.art{background:linear-gradient(#0000 55%,#0009),var(--art) center/cover no-repeat}
-.mon.art>b{visibility:hidden}
+.mon b.nm{font-size:3.2cqw;font-weight:800;line-height:1.15;color:#fff;padding:0 1cqw;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
 .cd.em{visibility:hidden;pointer-events:none}.cd.ov{margin-left:-14cqw}.cd.gp{margin-left:2cqw}
 .slot.so{background:#ff8a3a33;box-shadow:0 0 0 .6cqw #ff8a3a}
 .cd.so{box-shadow:0 0 2cqw #ff8a3a}
@@ -102,10 +101,10 @@ u.at.rg::after{content:"";position:absolute;left:-1.2cqw;top:-.89cqw;width:5cqw;
 <div id="lgp"><h2>Nhật ký</h2><div id="lgl"></div><button id="lgx">Đóng</button></div>
 </div>
 <script>
-['Assets/UI/attack_icon.png','Assets/UI/block_icon.png','Assets/UI/bow_icon.png','Assets/UI/heal_icon.png','Assets/UI/heart_icon.png','Assets/UI/sword_icon.png','Assets/UI/mana_icon.png','Assets/Char/char_dieuthuyen.webp'].forEach(u=>{const m=new Image();m.src=u;m.decode&&m.decode().catch(()=>{})});
+['Assets/UI/attack_icon.png','Assets/UI/block_icon.png','Assets/UI/bow_icon.png','Assets/UI/heal_icon.png','Assets/UI/heart_icon.png','Assets/UI/sword_icon.png','Assets/UI/mana_icon.png','Assets/Char/char_dieuthuyen.webp','Assets/Char/char_gcl.webp'].forEach(u=>{const m=new Image();m.src=u;m.decode&&m.decode().catch(()=>{})});
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=a=>a[Math.random()*a.length|0];
 const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const M=[{n:'Điêu Thuyền',e:'🐺',c:1,a:3,h:5,img:'Assets/Char/char_dieuthuyen.webp'},{n:'Gấu đá',e:'🐻',c:2,a:3,h:9},{n:'Nhím gai',e:'🦔',c:2,a:2,h:6,t:2},{n:'Rùa khiên',e:'🐢',c:2,a:2,h:6,s:3},{n:'Cáo cung',e:'🦊',c:1,a:2,h:4,r:1},{n:'Cú phép',e:'🦉',c:2,a:3,h:5,r:1},{n:'Rồng con',e:'🐲',c:3,a:5,h:8}];
+const M=[{n:'Điêu Thuyền',e:'🐺',c:1,a:3,h:5,img:'Assets/Char/char_dieuthuyen.webp'},{n:'Gấu đá',c:2,a:3,h:9,img:'Assets/Char/char_gcl.webp'},{n:'Nhím gai',e:'🦔',c:2,a:2,h:6,t:2},{n:'Rùa khiên',e:'🐢',c:2,a:2,h:6,s:3},{n:'Cáo cung',e:'🦊',c:1,a:2,h:4,r:1},{n:'Cú phép',e:'🦉',c:2,a:3,h:5,r:1},{n:'Rồng con',e:'🐲',c:3,a:5,h:8}];
 const I=[{n:'Kiếm',e:'⚔️',c:1,k:'a',v:2,q:'e',d:'Trang bị: +2 công (cận chiến)'},{n:'Khiên',e:'🛡️',c:1,k:'s',v:3,q:'p',d:'Phép: +3 khiên'},{n:'Gai',e:'🌵',c:1,k:'t',v:2,q:'e',d:'Trang bị: +2 gai'},{n:'Đỡ',e:'✋',c:1,k:'b',v:1,q:'p',d:'Phép: chặn 1 đòn'},{n:'Thuốc',e:'🧪',c:1,k:'h',v:4,q:'p',d:'Phép: +4 máu'}];
 let AC,mute=false;
 const au=()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state=='suspended')AC.resume();return AC};
@@ -130,9 +129,9 @@ function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
   if(k=='p'&&G.sac&&m)d.classList.add('so');
-  if(m)d.innerHTML=`<div class="mon${m.img?' art':''}"${m.img?` style="--art:url(${m.img})"`:''}>${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b>${m.e}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
+  if(m)d.innerHTML=`<div class="mon${m.img?' art':''}"${m.img?` style="--art:url(${m.img})"`:''}>${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh">🛡️<i>${m.s}</i></u>`:''}</u><b class="nm">${m.n}</b><span>${sk(m)}</span>${m.eq?`<u class="eq" title="${m.eq.n}">${m.eq.e}</u>`:''}</div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}${c.img?' art':''}" data-i="${i}"${c.img?` style="--art:url(${c.img})"`:''}><span class="co">${c.c}</span><i>${c.n}</i><b>${c.e}</b>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd">${c.e}<i>${c.v}</i></span>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}${c.img?' art':''}" data-i="${i}"${c.img?` style="--art:url(${c.img})"`:''}><span class="co">${c.c}</span><i>${c.n}</i>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd">${c.e}<i>${c.v}</i></span>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
  $('#h1').innerHTML=side('o','Địch');$('#h2').innerHTML=side('p','Bạn');
  $('#en').innerHTML=`<em class="mi"></em> ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
@@ -146,7 +145,7 @@ async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
  for(const m of[...S.board]){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
   const at=atks(m).find(a=>act(a,i)),rg=at.r,j=rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
-  const tx=hit(t,at.d);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.e+' '+m.n+' đánh '+t.e+' '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
+  const tx=hit(t,at.d);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
   await sleep(700);clean();render()}
  return lost('o')||lost('p')}
@@ -155,7 +154,7 @@ async function enemy(){const S=G.o;let en=G.oen;
   const opts=S.hand.map((c,i)=>({c,i})).filter(x=>x.c&&x.c.c<=en);
   for(const x of opts)if(x.c.y=='m'&&emp.length){pk=x;ti=emp[0];break}
   if(!pk)for(const x of opts)if(x.c.y=='i'&&mons.length){let ts=mons;if(x.c.k=='h')ts=mons.filter(j=>S.board[j].h<S.board[j].mh);if(x.c.k=='t')ts=mons.filter(j=>!S.board[j].r);if(x.c.k=='b')ts=mons.filter(j=>!S.board[j].b);if(x.c.q=='e')ts=ts.filter(j=>!S.board[j].eq);if(ts.length){pk=x;ti=rnd(ts);break}}
-  if(!pk)break;en-=pk.c.c;sfx(pk.c.y=='m'?'play':pk.c.k=='h'?'heal':'item');{const tm=S.board[ti];G.lg.push('Địch: '+pk.c.e+' '+pk.c.n+(pk.c.y=='m'?' → ô '+(ti+1):' → '+tm.e+' '+tm.n))}useCard(S,pk.i,ti);render();await sleep(600)}G.oen=en}
+  if(!pk)break;en-=pk.c.c;sfx(pk.c.y=='m'?'play':pk.c.k=='h'?'heal':'item');{const tm=S.board[ti];G.lg.push('Địch: '+pk.c.n+(pk.c.y=='m'?' → ô '+(ti+1):' → '+tm.n))}useCard(S,pk.i,ti);render();await sleep(600)}G.oen=en}
 function fin(){const a=lost('o'),b=lost('p');let r;
  r=a&&b?'🤝 Hòa':a?'🏆 Bạn thắng!':'💀 Bạn thua';
  $('#ovt').textContent=r;$('#ov').style.display='flex';sfx(r.startsWith('🏆')?'win':r.startsWith('💀')?'lose':'turn')}
@@ -168,7 +167,7 @@ async function endTurn(){if(G.busy)return;G.busy=true;G.sel=null;G.sac=false;sfx
 function sacrifice(w,i){const S=G.p;let c,g;
  if(w=='h'){c=S.hand[i];g=c.y=='m'?2:1;const n=draw(S,c.y);if(n)S.hand[i]=n;else S.hand[i]=null}
  else{c=S.board[i];g=1;S.board[i]=null;compact(S.board)}
- G.en+=g;G.sd=true;G.sac=false;G.sel=null;G.lg.push('Bạn hiến tế '+c.e+' '+c.n+' → +'+g+' ⚡');sfx('item');render()}
+ G.en+=g;G.sd=true;G.sac=false;G.sel=null;G.lg.push('Bạn hiến tế '+c.n+' → +'+g+' ⚡');sfx('item');render()}
 $('#sac').onclick=()=>{if(G.busy||G.sd)return;G.sac=!G.sac;G.sel=null;sfx('pick');render()};
 $('#hand').onclick=e=>{const c=e.target.closest('.cd');if(!c||G.busy)return;const i=+c.dataset.i,cd=G.p.hand[i];if(!cd)return;
  if(G.sac)return sacrifice('h',i);
@@ -177,7 +176,7 @@ $('#p').onclick=e=>{const s=e.target.closest('.slot');if(!s||G.busy)return;const
  if(G.sac){if(G.p.board[i])sacrifice('b',i);return}
  if(G.sel==null)return;
  if(!valid(i))return
- const c=G.p.hand[G.sel],tm=G.p.board[i];G.lg.push('Bạn: '+c.e+' '+c.n+(c.y=='m'?' → ô '+(i+1):' → '+tm.e+' '+tm.n));sfx(c.y=='m'?'play':c.k=='h'?'heal':'item');G.en-=c.c;useCard(G.p,G.sel,i);G.sel=null;render()};
+ const c=G.p.hand[G.sel],tm=G.p.board[i];G.lg.push('Bạn: '+c.n+(c.y=='m'?' → ô '+(i+1):' → '+tm.n));sfx(c.y=='m'?'play':c.k=='h'?'heal':'item');G.en-=c.c;useCard(G.p,G.sel,i);G.sel=null;render()};
 $('#end').onclick=endTurn;$('#mu').onclick=()=>{mute=!mute;$('#mu').textContent=mute?'🔇':'🔊';if(!mute)sfx('pick')};const openLog=()=>{$('#lgl').innerHTML=G.lg.map(t=>`<div${t[0]=='—'?' class="tn"':''}>${t}</div>`).join('');$('#lgp').style.display='flex';$('#lgl').scrollTop=1e9};
 $('#lgb').onclick=$('#lgb2').onclick=openLog;$('#lgx').onclick=()=>$('#lgp').style.display='none';
 $('#sur').onclick=()=>{if(G.busy||$('#ov').style.display=='flex')return;$('#cf').style.display='flex'};
