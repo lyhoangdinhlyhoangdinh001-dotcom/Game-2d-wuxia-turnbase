@@ -115,9 +115,9 @@ const inst=c=>({n:c.n,e:c.e,a:c.a,ba:c.a,h:c.h,mh:c.h,s:c.s||0,t:c.t||0,b:0,sw:0
 function useCard(S,hi,ti){const c=S.hand[hi],m=S.board[ti];if(c.y=='m'){let e=ti;while(S.board[e])e++;for(let j=e;j>ti;j--)S.board[j]=S.board[j-1];S.board[ti]=inst(c);compact(S.board)}else if(c.k=='h')m.h=Math.min(m.mh,m.h+c.v);else{const key=c.k=='a'&&m.r?'sw':c.k;if(c.q=='e'&&m.eq)m[m.eq.k]-=m.eq.v;m[key]+=c.v;if(c.q=='e')m.eq={e:c.e,n:c.n,k:key,v:c.v}}{const n=draw(S,c.y);if(n)S.hand[hi]=n;else S.hand[hi]=null}if(c.y=='m')S.pl=true}
 const lost=k=>{const S=G[k];return !S.board.some(Boolean)&&!S.hand.some(c=>c&&c.y=='m')&&!S.dm.length};
 function start(){G={p:newSide(),o:newSide(),en:3,oen:3,turn:1,sel:null,sac:false,sd:false,busy:false,lg:['— Lượt 1 —']};$('#ov').style.display='none';$('#lgp').style.display='none';render()}
-const valid=i=>{const c=G.p.hand[G.sel];return c&&c.c<=G.en&&(c.y=='m'?(n=>n>=0&&i<=n)(G.p.board.findIndex(x=>!x)):!!G.p.board[i])};
-const sk=m=>[['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>m[k]>0).map(([k,e])=>`<u class="sk">${e}<i>${m[k]}</i></u>`).join('');
-const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>c[k]>0);return`<span class="hxs">${[0,1,2].map(n=>l[n]?`<em class="hx sk">${l[n][1]}<i>${c[l[n][0]]}</i></em>`:`<em class="hx e"></em>`).join('')}</span>`};
+const valid=i=>{const c=G.p.hand[G.sel];return c&&c.c<=G.en&&(c.y=='m'?(n=>n>=0&&i<=n)(G.p.board.findIndex(x=>!x)):!!G.p.board[i]&&!(c.k=='b'&&G.p.board[i].b>0))};
+const sk=m=>[['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>m[k]>0).map(([k,e])=>`<u class="sk">${e}${k=='b'?'':`<i>${m[k]}</i>`}</u>`).join('');
+const hx=c=>{const l=[['s','🛡️'],['t','🌵'],['b','<em class="bi"></em>']].filter(([k])=>c[k]>0);return`<span class="hxs">${[0,1,2].map(n=>l[n]?`<em class="hx sk">${l[n][1]}${l[n][0]=='b'?'':`<i>${c[l[n][0]]}</i>`}</em>`:`<em class="hx e"></em>`).join('')}</span>`};
 const hp=i=>i==0?'':i==2?'gp':'ov';
 function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
@@ -147,7 +147,7 @@ async function enemy(){const S=G.o;let en=G.oen;
  for(let n=0;n<8;n++){const emp=[0,1,2].filter(j=>!S.board[j]),mons=[0,1,2].filter(j=>S.board[j]);let pk=null,ti=null;
   const opts=S.hand.map((c,i)=>({c,i})).filter(x=>x.c&&x.c.c<=en);
   for(const x of opts)if(x.c.y=='m'&&emp.length){pk=x;ti=emp[0];break}
-  if(!pk)for(const x of opts)if(x.c.y=='i'&&mons.length){let ts=mons;if(x.c.k=='h')ts=mons.filter(j=>S.board[j].h<S.board[j].mh);if(x.c.k=='t')ts=mons.filter(j=>!S.board[j].r);if(x.c.q=='e')ts=ts.filter(j=>!S.board[j].eq);if(ts.length){pk=x;ti=rnd(ts);break}}
+  if(!pk)for(const x of opts)if(x.c.y=='i'&&mons.length){let ts=mons;if(x.c.k=='h')ts=mons.filter(j=>S.board[j].h<S.board[j].mh);if(x.c.k=='t')ts=mons.filter(j=>!S.board[j].r);if(x.c.k=='b')ts=mons.filter(j=>!S.board[j].b);if(x.c.q=='e')ts=ts.filter(j=>!S.board[j].eq);if(ts.length){pk=x;ti=rnd(ts);break}}
   if(!pk)break;en-=pk.c.c;sfx(pk.c.y=='m'?'play':pk.c.k=='h'?'heal':'item');{const tm=S.board[ti];G.lg.push('Địch: '+pk.c.e+' '+pk.c.n+(pk.c.y=='m'?' → ô '+(ti+1):' → '+tm.e+' '+tm.n))}useCard(S,pk.i,ti);render();await sleep(600)}G.oen=en}
 function fin(){const a=lost('o'),b=lost('p');let r;
  r=a&&b?'🤝 Hòa':a?'🏆 Bạn thắng!':'💀 Bạn thua';
