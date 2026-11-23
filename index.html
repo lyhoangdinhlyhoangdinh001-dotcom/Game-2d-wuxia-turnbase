@@ -92,6 +92,7 @@ u.at.hl::after{content:"";position:absolute;left:-.6cqw;top:-.29cqw;width:3.8cqw
 u.at.rg::after{content:"";position:absolute;left:-1.2cqw;top:-.89cqw;width:5cqw;height:5cqw;z-index:-1;background:var(--bow) center/contain no-repeat}
 .hp{isolation:isolate;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:.4cqw 0 var(--hp-y);width:6.4cqw;height:6cqw;color:#fff;font-weight:900;text-shadow:-.35cqw 0 #1a0d0d,.35cqw 0 #1a0d0d,0 -.35cqw #1a0d0d,0 .35cqw #1a0d0d,-.28cqw -.28cqw #1a0d0d,.28cqw -.28cqw #1a0d0d,-.28cqw .28cqw #1a0d0d,.28cqw .28cqw #1a0d0d}
 .hp::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--heart) center/8.8cqw 8.8cqw no-repeat}
+u.at.mg::after{background:none;content:'🪄';display:flex;align-items:center;justify-content:center;font-size:3.4cqw;line-height:1;text-shadow:none}
 @media (prefers-reduced-motion:reduce){.slot.ok,.fl{animation:none}}
 </style></head><body>
 <div id="board">
@@ -107,7 +108,7 @@ u.at.rg::after{content:"";position:absolute;left:-1.2cqw;top:-.89cqw;width:5cqw;
 ['Assets/UI/attack_icon.png','Assets/UI/block_icon.png','Assets/UI/shield_icon.webp','Assets/UI/bow_icon.png','Assets/UI/heal_icon.png','Assets/UI/heart_icon.png','Assets/UI/sword_icon.png','Assets/UI/mana_icon.png','Assets/Char/char_dieuthuyen.webp','Assets/Char/char_gcl.webp','Assets/Char/char_herb.webp','Assets/Char/char_shield.webp','Assets/Char/char_sword.webp','Assets/Char/char_nhim.webp','Assets/Char/char_rong.webp','Assets/Char/char_cu.webp','Assets/Char/char_thorn.webp','Assets/Char/char_block.webp','Assets/Char/char_turtle.webp','Assets/Char/char_fox.webp'].forEach(u=>{const m=new Image();m.src=u;m.decode&&m.decode().catch(()=>{})});
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=a=>a[Math.random()*a.length|0];
 const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
-const M=[{n:'Điêu Thuyền',e:'🐺',c:1,a:3,h:5,img:'Assets/Char/char_dieuthuyen.webp'},{n:'Gia Cát Lượng',c:2,a:3,h:9,img:'Assets/Char/char_gcl.webp'},{n:'Lưu Bị',e:'🦔',c:2,a:2,h:6,t:2,img:'Assets/Char/char_nhim.webp'},{n:'Đổng Trác',e:'🐢',c:2,a:2,h:6,s:3,img:'Assets/Char/char_turtle.webp'},{n:'Hoàng Trung',e:'🦊',c:1,a:2,h:4,r:1,img:'Assets/Char/char_fox.webp'},{n:'Trương Phi',e:'🦉',c:2,a:3,h:5,r:1,img:'Assets/Char/char_cu.webp'},{n:'Quan Vũ',e:'🐲',c:3,a:5,h:8,img:'Assets/Char/char_rong.webp'}];
+const M=[{n:'Điêu Thuyền',e:'🐺',c:1,a:3,h:5,img:'Assets/Char/char_dieuthuyen.webp'},{n:'Gia Cát Lượng',c:2,a:3,h:9,r:1,mg:1,img:'Assets/Char/char_gcl.webp'},{n:'Lưu Bị',e:'🦔',c:2,a:2,h:6,t:2,img:'Assets/Char/char_nhim.webp'},{n:'Đổng Trác',e:'🐢',c:2,a:2,h:6,s:3,img:'Assets/Char/char_turtle.webp'},{n:'Hoàng Trung',e:'🦊',c:1,a:2,h:4,r:1,img:'Assets/Char/char_fox.webp'},{n:'Trương Phi',e:'🦉',c:2,a:3,h:5,r:1,img:'Assets/Char/char_cu.webp'},{n:'Quan Vũ',e:'🐲',c:3,a:5,h:8,img:'Assets/Char/char_rong.webp'}];
 const I=[{n:'Kiếm',e:'⚔️',c:1,k:'a',v:2,q:'e',d:'Trang bị: +2 công (cận chiến)',img:'Assets/Char/char_sword.webp'},{n:'Khiên',e:'🛡️',c:1,k:'s',v:3,q:'p',d:'Phép: +3 khiên',img:'Assets/Char/char_shield.webp'},{n:'Gai',e:'🌵',c:1,k:'t',v:2,q:'e',d:'Trang bị: +2 gai',img:'Assets/Char/char_thorn.webp'},{n:'Đỡ',e:'✋',c:1,k:'b',v:1,q:'p',d:'Phép: chặn 1 đòn',img:'Assets/Char/char_block.webp'},{n:'Thuốc',e:'🧪',c:1,k:'h',v:4,q:'p',d:'Phép: +4 máu',img:'Assets/Char/char_herb.webp'}];
 let AC,mute=false;
 const au=()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state=='suspended')AC.resume();return AC};
@@ -120,7 +121,7 @@ const DM=[0,0,1,2,3,4,5,6],DI=[0,0,1,1,2,3,4,4];
 const mk=(y,L,a)=>shuf(a.map(i=>({y,...L[i]})));
 const draw=(S,y)=>(y=='m'?S.dm:S.di).pop();
 const newSide=()=>{const S={dm:mk('m',M,DM),di:mk('i',I,DI),board:[null,null,null],pl:false};S.hand=[draw(S,'m'),draw(S,'m'),draw(S,'i'),draw(S,'i')];return S};
-const inst=c=>({n:c.n,e:c.e,a:c.a,ba:c.a,h:c.h,mh:c.h,s:c.s||0,t:c.t||0,b:0,sw:0,r:!!c.r,img:c.img||''});
+const inst=c=>({n:c.n,e:c.e,a:c.a,ba:c.a,h:c.h,mh:c.h,s:c.s||0,t:c.t||0,b:0,sw:0,r:!!c.r,mg:!!c.mg,img:c.img||''});
 function useCard(S,hi,ti){const c=S.hand[hi],m=S.board[ti];if(c.y=='m'){let e=ti;while(S.board[e])e++;for(let j=e;j>ti;j--)S.board[j]=S.board[j-1];S.board[ti]=inst(c);compact(S.board)}else if(c.k=='h')m.h=Math.min(m.mh,m.h+c.v);else{const key=c.k=='a'&&m.r?'sw':c.k;if(c.q=='e'&&m.eq)m[m.eq.k]-=m.eq.v;m[key]+=c.v;if(c.q=='e')m.eq={e:c.e,n:c.n,k:key,v:c.v,img:c.img}}{const n=draw(S,c.y);if(n)S.hand[hi]=n;else S.hand[hi]=null}if(c.y=='m')S.pl=true}
 const lost=k=>{const S=G[k];return !S.board.some(Boolean)&&!S.hand.some(c=>c&&c.y=='m')&&!S.dm.length};
 function start(){G={p:newSide(),o:newSide(),en:3,oen:3,turn:1,sel:null,sac:false,sd:false,busy:false,lg:['— Lượt 1 —']};$('#ov').style.display='none';$('#lgp').style.display='none';render()}
@@ -132,23 +133,23 @@ function render(){
  for(const k of['o','p']){const el=$('#'+k);el.innerHTML='';[1,0,2].forEach(i=>{const m=G[k].board[i],d=document.createElement('div');d.className='slot c'+i+' '+k;d.dataset.s=k;d.dataset.i=i;
   if(k=='p'&&G.sel!=null&&valid(i))d.classList.add('ok');
   if(k=='p'&&G.sac&&m)d.classList.add('so');
-  if(m)d.innerHTML=`<div class="mon${m.img?' art':''}"${m.img?` style="--art:url(${m.img})"`:''}>${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh"><em class="si"></em><i>${m.s}</i></u>`:''}</u><span>${sk(m)}</span>${m.eq?`<u class="eq${m.eq.img?' im':''}" title="${m.eq.n}"${m.eq.img?` style="background-image:url(${m.eq.img})"`:''}>${m.eq.img?'':m.eq.e}</u>`:''}</div>`;
+  if(m)d.innerHTML=`<div class="mon${m.img?' art':''}"${m.img?` style="--art:url(${m.img})"`:''}>${atks(m).map((a,k)=>{const ok=act(a,i);return `<u class="at${a.r?' rg':''}${a.mg?' mg':''}${ok?'':' off'}${k?'':m.a<m.ba?' lo':m.a>m.ba?' hi':''}" style="bottom:${-.5+k*6.4}cqw">${a.d}${ok?'':'<s>✕</s>'}</u>`}).join('')}<u class="hp${m.h<m.mh?' lo':m.h>m.mh?' hi':''}">${m.h}${m.s>0?`<u class="sh"><em class="si"></em><i>${m.s}</i></u>`:''}</u><span>${sk(m)}</span>${m.eq?`<u class="eq${m.eq.img?' im':''}" title="${m.eq.n}"${m.eq.img?` style="background-image:url(${m.eq.img})"`:''}>${m.eq.img?'':m.eq.e}</u>`:''}</div>`;
   el.appendChild(d)})}
- $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}${c.img?' art':''}" data-i="${i}"${c.img?` style="--art:url(${c.img})"`:''}><span class="co">${c.c}</span><i>${c.n}</i>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd"><em class="si"></em><i>${c.v}</i></span>`:''}</div>`).join('');
+ $('#hand').innerHTML=G.p.hand.map((c,i)=>!c?`<div class="cd em ${hp(i)}" data-i="${i}"></div>`:`<div class="cd ${c.y=='i'?'it':''} ${c.q=='p'?'sp':''} ${hp(i)} ${G.sel===i?'sel':''} ${G.sac?'so':''}${c.img?' art':''}" data-i="${i}"${c.img?` style="--art:url(${c.img})"`:''}><span class="co">${c.c}</span><i>${c.n}</i>${c.y=='m'?hx(c):c.k=='b'?hx({b:c.v}):`<span>${c.d}</span>`}${c.y=='m'?`<u class="at${c.r?' rg':''}${c.mg?' mg':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd"><em class="si"></em><i>${c.v}</i></span>`:''}</div>`).join('');
  const side=(k,nm)=>{const S=G[k];return`${nm} · 🐾${S.dm.length} 🎒${S.di.length}`};
  $('#h1').innerHTML=side('o','Địch');$('#h2').innerHTML=side('p','Bạn');
  $('#en').innerHTML=`<em class="mi"></em> ${G.en}`;$('#end').disabled=G.busy;$('#sac').disabled=G.busy||G.sd;$('#sac').textContent=G.sac?'Hủy':'Hiến tế'}
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),900)}
-function hit(x,d){if(x.b>0){x.b--;return'Chặn!'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
-const atks=m=>{const l=[{r:!!m.r,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.r?i>0:i==0;
+function hit(x,d,mg){if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
+const atks=m=>{const l=[{r:!!m.r,mg:!!m.mg,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.r?i>0:i==0;
 const canAtk=(m,i)=>atks(m).some(a=>act(a,i));
 const compact=B=>{const a=B.filter(Boolean);while(a.length<3)a.push(null);B.splice(0,3,...a)};
 const clean=()=>['p','o'].forEach(k=>{const B=G[k].board;B.forEach((m,j)=>{if(m&&m.h<=0){B[j]=null;sfx('die')}});compact(B)});
 async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
  for(const m of[...S.board]){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
-  const at=atks(m).find(a=>act(a,i)),rg=at.r,j=rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
-  const tx=hit(t,at.d);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
+  const at=atks(m).find(a=>act(a,i)),rg=at.r,j=at.mg?(E.board[i]?i:al[0]):rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
+  const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(at.mg?'item':rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
   await sleep(700);clean();render()}
  return lost('o')||lost('p')}
