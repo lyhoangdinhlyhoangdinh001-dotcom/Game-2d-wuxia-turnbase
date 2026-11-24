@@ -64,6 +64,7 @@ u.at.lo,.hp.lo{color:#ff5a4a}u.at.hi,.hp.hi{color:#6fe36f}
 .mon.art{background:linear-gradient(#0000 55%,#0009),var(--art) center/cover no-repeat}
 .mon b.nm{position:absolute;top:0;left:0;right:0;box-sizing:border-box;padding:.8cqw 1cqw 2.4cqw;background:linear-gradient(#000d,#0000);border-radius:1cqw 1cqw 0 0;z-index:1;font-size:3.2cqw;font-weight:800;line-height:1.15;color:#fff;padding:0 1cqw;text-shadow:-.3cqw 0 #000,.3cqw 0 #000,0 -.3cqw #000,0 .3cqw #000,-.25cqw -.25cqw #000,.25cqw -.25cqw #000,-.25cqw .25cqw #000,.25cqw .25cqw #000}
 .cd.em{visibility:hidden;pointer-events:none}.cd.ov{margin-left:-14cqw}.cd.gp{margin-left:2cqw}
+.lt{position:absolute;pointer-events:none;z-index:6;background:url(Assets/FX/lotus_sheet.webp) 0 0/900% 600% no-repeat;will-change:background-position}
 #ins{position:absolute;inset:0;background:#000d;display:none;flex-direction:column;align-items:center;justify-content:center;gap:3.5cqw;z-index:8;cursor:pointer;text-align:center}
 #ins .who{font-size:4.2cqw;font-weight:800;color:#a8e0a8}#ins .who.o{color:#f0a8a0}
 #ins .pair{display:flex;gap:7cqw;align-items:flex-start;margin:2cqw 0}
@@ -115,7 +116,7 @@ u.at.mg::after{left:-1.4cqw;top:-1.4cqw;width:6.4cqw;height:6.4cqw;background:va
 <div id="lgp"><h2>Nhật ký</h2><div id="lgl"></div><button id="lgx">Đóng</button></div>
 </div>
 <script>
-['Assets/UI/attack_icon.png','Assets/UI/block_icon.png','Assets/UI/shield_icon.webp','Assets/UI/staff_icon.webp','Assets/UI/bow_icon.png','Assets/UI/heal_icon.png','Assets/UI/heart_icon.png','Assets/UI/sword_icon.png','Assets/UI/mana_icon.png','Assets/Char/char_dieuthuyen.webp','Assets/Char/char_gcl.webp','Assets/Char/char_herb.webp','Assets/Char/char_shield.webp','Assets/Char/char_sword.webp','Assets/Char/char_nhim.webp','Assets/Char/char_rong.webp','Assets/Char/char_cu.webp','Assets/Char/char_thorn.webp','Assets/Char/char_block.webp','Assets/Char/char_turtle.webp','Assets/Char/char_fox.webp'].forEach(u=>{const m=new Image();m.src=u;m.decode&&m.decode().catch(()=>{})});
+['Assets/FX/lotus_sheet.webp','Assets/UI/attack_icon.png','Assets/UI/block_icon.png','Assets/UI/shield_icon.webp','Assets/UI/staff_icon.webp','Assets/UI/bow_icon.png','Assets/UI/heal_icon.png','Assets/UI/heart_icon.png','Assets/UI/sword_icon.png','Assets/UI/mana_icon.png','Assets/Char/char_dieuthuyen.webp','Assets/Char/char_gcl.webp','Assets/Char/char_herb.webp','Assets/Char/char_shield.webp','Assets/Char/char_sword.webp','Assets/Char/char_nhim.webp','Assets/Char/char_rong.webp','Assets/Char/char_cu.webp','Assets/Char/char_thorn.webp','Assets/Char/char_block.webp','Assets/Char/char_turtle.webp','Assets/Char/char_fox.webp'].forEach(u=>{const m=new Image();m.src=u;m.decode&&m.decode().catch(()=>{})});
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=a=>a[Math.random()*a.length|0];
 const shuf=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
 const M=[{n:'Điêu Thuyền',e:'🐺',c:1,a:3,h:5,img:'Assets/Char/char_dieuthuyen.webp'},{n:'Gia Cát Lượng',c:2,a:3,h:9,r:1,mg:1,img:'Assets/Char/char_gcl.webp'},{n:'Lưu Bị',e:'🦔',c:2,a:2,h:6,t:2,img:'Assets/Char/char_nhim.webp'},{n:'Đổng Trác',e:'🐢',c:2,a:2,h:6,s:3,img:'Assets/Char/char_turtle.webp'},{n:'Hoàng Trung',e:'🦊',c:1,a:2,h:4,r:1,img:'Assets/Char/char_fox.webp'},{n:'Trương Phi',e:'🦉',c:2,a:3,h:5,r:1,img:'Assets/Char/char_cu.webp'},{n:'Quan Vũ',e:'🐲',c:3,a:5,h:8,img:'Assets/Char/char_rong.webp'}];
@@ -124,7 +125,7 @@ let AC,mute=false;
 const au=()=>{if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state=='suspended')AC.resume();return AC};
 function tone(f,d,ty='sine',v=.15,t0=0,f2){const a=au();if(!a||mute)return;const t=a.currentTime+t0,o=a.createOscillator(),g=a.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d)}
 function noise(d,v=.2,fc=1500,t0=0){const a=au();if(!a||mute)return;const n=a.sampleRate*d|0,b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*(1-i/n);const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=b;f.type='lowpass';f.frequency.value=fc;g.gain.value=v;s.connect(f);f.connect(g);g.connect(a.destination);s.start(a.currentTime+t0)}
-const SFX={pick:()=>tone(660,.08,'triangle',.1),play:()=>{tone(300,.12,'triangle',.15,0,500);noise(.08,.1,3000)},item:()=>{tone(700,.1,'sine',.12);tone(1050,.14,'sine',.1,.08)},sword:()=>{noise(.12,.18,5000);tone(220,.1,'sawtooth',.08,0,110)},bow:()=>{tone(900,.14,'triangle',.1,0,300);noise(.06,.08,6000,.1)},hit:()=>{noise(.15,.3,900);tone(140,.15,'square',.1,0,60)},shield:()=>{tone(1200,.1,'square',.07);tone(800,.18,'triangle',.1,.03)},block:()=>{tone(500,.08,'square',.1);noise(.05,.12,4000)},thorn:()=>{tone(1400,.06,'sawtooth',.06);tone(1000,.08,'sawtooth',.06,.05)},heal:()=>[523,659,784].forEach((f,i)=>tone(f,.18,'sine',.1,i*.09)),turn:()=>{tone(392,.15,'triangle',.12);tone(523,.2,'triangle',.12,.12)},win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.3,'triangle',.14,i*.14)),lose:()=>[392,330,262,196].forEach((f,i)=>tone(f,.35,'sawtooth',.08,i*.18)),die:()=>{tone(200,.3,'sawtooth',.1,0,50);noise(.2,.2,600)}};
+const SFX={pick:()=>tone(660,.08,'triangle',.1),play:()=>{tone(300,.12,'triangle',.15,0,500);noise(.08,.1,3000)},item:()=>{tone(700,.1,'sine',.12);tone(1050,.14,'sine',.1,.08)},sword:()=>{noise(.12,.18,5000);tone(220,.1,'sawtooth',.08,0,110)},bow:()=>{tone(900,.14,'triangle',.1,0,300);noise(.06,.08,6000,.1)},lotus:()=>{[784,988,1319,1568].forEach((f,i)=>tone(f,.28,'sine',.06,i*.08));noise(.35,.04,7000,.3)},bloom:()=>{tone(523,.35,'triangle',.1,0,1046);noise(.2,.08,6000)},hit:()=>{noise(.15,.3,900);tone(140,.15,'square',.1,0,60)},shield:()=>{tone(1200,.1,'square',.07);tone(800,.18,'triangle',.1,.03)},block:()=>{tone(500,.08,'square',.1);noise(.05,.12,4000)},thorn:()=>{tone(1400,.06,'sawtooth',.06);tone(1000,.08,'sawtooth',.06,.05)},heal:()=>[523,659,784].forEach((f,i)=>tone(f,.18,'sine',.1,i*.09)),turn:()=>{tone(392,.15,'triangle',.12);tone(523,.2,'triangle',.12,.12)},win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.3,'triangle',.14,i*.14)),lose:()=>[392,330,262,196].forEach((f,i)=>tone(f,.35,'sawtooth',.08,i*.18)),die:()=>{tone(200,.3,'sawtooth',.1,0,50);noise(.2,.2,600)}};
 const sfx=k=>{try{SFX[k]()}catch(e){}};
 let G;
 const DM=[0,0,1,2,3,4,5,6],DI=[0,0,1,1,2,3,4,4];
@@ -156,6 +157,16 @@ function inspect(k,i){const m=G[k].board[i];if(!m)return;sfx('pick');
  const nt=[m.r&&!m.mg?'Tầm xa: đánh được từ hàng sau, không bị gai phản.':'',m.mg?'Phép thuật: sát thương bỏ qua khiên.':'',m.s>0?`Khiên ${m.s}: chịu thay ${m.s} sát thương.`:'',m.t>0?`Gai ${m.t}: phản ${m.t} sát thương cho kẻ đánh cận chiến.`:'',m.b>0?`Chặn ${m.b}: vô hiệu ${m.b} đòn.`:''].filter(Boolean).map(t=>`<div>• ${t}</div>`).join('');
  $('#ins').innerHTML=`<div class="who ${k}">${k=='p'?'Bạn':'Địch'}</div><div class="pair"><div class="col">${mc}<span>Quái vật</span></div><div class="col">${wc}<span>Trang bị</span></div></div>${nt?`<div class="nt">${nt}</div>`:''}<div class="hint">Chạm để đóng</div>`;
  $('#ins').style.display='flex'}
+function lotus(k,j,dur=1100,pk=.62){const sl=document.querySelector(`.slot[data-s="${k}"][data-i="${j}"]`),bd=$('#board');
+ const e=document.createElement('div');e.className='lt';
+ if(sl){const a=sl.getBoundingClientRect(),b=bd.getBoundingClientRect(),z=a.width*1.9;e.style.cssText=`left:${a.left-b.left+a.width/2-z/2}px;top:${a.top-b.top+a.height/2-z/2}px;width:${z}px;height:${z}px`}
+ bd.appendChild(e);sfx('lotus');
+ let t0,mid=false,rp,rd;const peak=new Promise(r=>rp=r),done=new Promise(r=>rd=r);
+ const step=ts=>{t0??=ts;const p=Math.min((ts-t0)/dur,1),f=Math.min(53,p*54|0);
+  e.style.backgroundPosition=`${f%9/8*100}% ${(f/9|0)/5*100}%`;
+  if(!mid&&p>=pk){mid=true;rp()}
+  if(p<1)requestAnimationFrame(step);else{e.remove();rd()}};
+ requestAnimationFrame(step);return{peak,done}}
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),900)}
 function hit(x,d,mg){if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
 const atks=m=>{const l=[{r:!!m.r,mg:!!m.mg,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.mg?true:a.r?i>0:i==0;
@@ -166,9 +177,10 @@ async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
  for(const m of[...S.board].reverse()){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
   const at=atks(m).find(a=>act(a,i)),rg=at.r,j=at.mg?(E.board[i]?i:al[0]):rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
-  const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(at.mg?'item':rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
+  const lo=m.n=='Điêu Thuyền'&&!at.mg?lotus(ek,j):null;if(lo){document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');await lo.peak}
+  const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(lo?'bloom':at.mg?'item':rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
-  await sleep(700);clean();render()}
+  await(lo?lo.done:sleep(700));clean();render()}
  return lost('o')||lost('p')}
 async function enemy(){const S=G.o;let en=G.oen;
  for(let n=0;n<8;n++){const emp=[0,1,2].filter(j=>!S.board[j]),mons=[0,1,2].filter(j=>S.board[j]);let pk=null,ti=null;
