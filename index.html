@@ -218,7 +218,7 @@ const SND={
  arrow:()=>{tone(300,.15,'triangle',.05,.05,500);tone(900,.14,'triangle',.09,.15,300);noise(.06,.08,6000,.16);tone(260,.08,'square',.09,.39,150);noise(.06,.12,4500,.39)},
  orb:()=>{tone(400,.26,'sine',.07,0,1000);tone(600,.26,'triangle',.04,0,1500);noise(.3,.08,5000,.26);tone(900,.35,'sine',.06,.26,500);[880,1320,1760].forEach((f,x)=>tone(f,.3,'sine',.08,.64+x*.05));noise(.25,.12,5000,.64)}};
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),1400)}
-function hit(x,d,mg){if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
+let SH=0;function hit(x,d,mg){SH=0;if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;SH=a;return'-'+(d-a)}
 const atks=m=>{const l=[{r:!!m.r,mg:!!m.mg,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.mg?true:a.r?i>0:i==0;
 const canAtk=(m,i)=>atks(m).some(a=>act(a,i));
 const compact=B=>{const a=B.filter(Boolean);while(a.length<3)a.push(null);B.splice(0,3,...a)};
@@ -228,7 +228,7 @@ async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
   const at=atks(m).find(a=>act(a,i)),rg=at.r,j=at.mg?(E.board[i]?i:al[0]):rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
   const fv=vfx(m,at,k,i,ek,j);await fv.peak
-  const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));if(!fv)sfx(at.mg?'item':rg?'bow':'sword');setTimeout(()=>{const q=tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit';sfx(q)},130);if(rx)setTimeout(()=>sfx('thorn'),330);
+  const tx=hit(t,at.d,at.mg),sh=SH;let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+(sh?' 🛡️'+sh:'')+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));if(!fv)sfx(at.mg?'item':rg?'bow':'sword');setTimeout(()=>{const q=tx=='Chặn!'?'block':sh?'shield':'hit';sfx(q)},130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();if(!fv)document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
   await fv.done;clean();render();await sleep(450)}
  return lost('o')||lost('p')}
