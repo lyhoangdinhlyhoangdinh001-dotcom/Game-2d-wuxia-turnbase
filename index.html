@@ -157,16 +157,19 @@ function inspect(k,i){const m=G[k].board[i];if(!m)return;sfx('pick');
  const nt=[m.r&&!m.mg?'Tầm xa: đánh được từ hàng sau, không bị gai phản.':'',m.mg?'Phép thuật: sát thương bỏ qua khiên.':'',m.s>0?`Khiên ${m.s}: chịu thay ${m.s} sát thương.`:'',m.t>0?`Gai ${m.t}: phản ${m.t} sát thương cho kẻ đánh cận chiến.`:'',m.b>0?`Chặn ${m.b}: vô hiệu ${m.b} đòn.`:''].filter(Boolean).map(t=>`<div>• ${t}</div>`).join('');
  $('#ins').innerHTML=`<div class="who ${k}">${k=='p'?'Bạn':'Địch'}</div><div class="pair"><div class="col">${mc}<span>Quái vật</span></div><div class="col">${wc}<span>Trang bị</span></div></div>${nt?`<div class="nt">${nt}</div>`:''}<div class="hint">Chạm để đóng</div>`;
  $('#ins').style.display='flex'}
-function lotus(k,j,dur=1100,pk=.62){const sl=document.querySelector(`.slot[data-s="${k}"][data-i="${j}"]`),bd=$('#board');
- const e=document.createElement('div');e.className='lt';
- if(sl){const a=sl.getBoundingClientRect(),b=bd.getBoundingClientRect(),z=a.width*1.9;e.style.cssText=`left:${a.left-b.left+a.width/2-z/2}px;top:${a.top-b.top+a.height/2-z/2}px;width:${z}px;height:${z}px`}
- bd.appendChild(e);sfx('lotus');
- let t0,mid=false,rp,rd;const peak=new Promise(r=>rp=r),done=new Promise(r=>rd=r);
- const step=ts=>{t0??=ts;const p=Math.min((ts-t0)/dur,1),f=Math.min(53,p*54|0);
-  e.style.backgroundPosition=`${f%9/8*100}% ${(f/9|0)/5*100}%`;
-  if(!mid&&p>=pk){mid=true;rp()}
-  if(p<1)requestAnimationFrame(step);else{e.remove();rd()}};
- requestAnimationFrame(step);return{peak,done}}
+function lotus(k,i,ek,j){const bd=$('#board'),B=bd.getBoundingClientRect(),q=(s,n)=>document.querySelector(`.slot[data-s="${s}"][data-i="${n}"]`);
+ const ct=el=>{if(!el)return{x:B.width/2,y:B.height/2,w:B.width*.24};const r=el.getBoundingClientRect();return{x:r.left-B.left+r.width/2,y:r.top-B.top+r.height/2,w:r.width}};
+ const A=ct(q(k,i)),T=ct(q(ek,j)),zf=A.w*1.5,ze=A.w*2.1,T1=280,T2=700,T3=1350;
+ const e=document.createElement('div');e.className='lt';bd.appendChild(e);sfx('lotus');setTimeout(()=>noise(.35,.07,3000),T1);
+ let t0,hit=false,rp,rd;const peak=new Promise(r=>rp=r),done=new Promise(r=>rd=r);
+ const put=(x,y,z,f)=>{e.style.cssText=`left:${x-z/2}px;top:${y-z/2}px;width:${z}px;height:${z}px;background-position:${f%9/8*100}% ${(f/9|0)/5*100}%`};
+ const step=ts=>{t0??=ts;const t=ts-t0;
+  if(t<T1){const p=t/T1;put(A.x,A.y,zf*(.7+.3*p),Math.min(8,p*9|0))}
+  else if(t<T2){const p=(t-T1)/(T2-T1),m=p*p*(1.6-.6*p);put(A.x+(T.x-A.x)*m,A.y+(T.y-A.y)*m,zf,9+Math.min(21,p*22|0))}
+  else if(t<T3){const p=(t-T2)/(T3-T2);put(T.x,T.y,ze,31+Math.min(22,p*23|0));if(!hit&&t>=T2+60){hit=true;rp()}}
+  else{e.remove();if(!hit)rp();rd();return}
+  requestAnimationFrame(step)};
+ q(k,i)?.classList.add('go');requestAnimationFrame(step);return{peak,done}}
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),900)}
 function hit(x,d,mg){if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;return'-'+(d-a)+(a?' 🛡️'+a:'')}
 const atks=m=>{const l=[{r:!!m.r,mg:!!m.mg,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.mg?true:a.r?i>0:i==0;
@@ -177,7 +180,7 @@ async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
  for(const m of[...S.board].reverse()){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
   const at=atks(m).find(a=>act(a,i)),rg=at.r,j=at.mg?(E.board[i]?i:al[0]):rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
-  const lo=m.n=='Điêu Thuyền'&&!at.mg?lotus(ek,j):null;if(lo){document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');await lo.peak}
+  const lo=m.n=='Điêu Thuyền'&&!at.mg?lotus(k,i,ek,j):null;if(lo)await lo.peak
   const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(lo?'bloom':at.mg?'item':rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
   render();document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`)?.classList.add('go');fx(ek,j,tx);if(rx)fx(k,i,'🌵'+rx);
   await(lo?lo.done:sleep(700));clean();render()}
