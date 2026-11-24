@@ -163,7 +163,7 @@ const canAtk=(m,i)=>atks(m).some(a=>act(a,i));
 const compact=B=>{const a=B.filter(Boolean);while(a.length<3)a.push(null);B.splice(0,3,...a)};
 const clean=()=>['p','o'].forEach(k=>{const B=G[k].board;B.forEach((m,j)=>{if(m&&m.h<=0){B[j]=null;sfx('die')}});compact(B)});
 async function attack(k){const S=G[k],ek=k=='p'?'o':'p',E=G[ek];
- for(const m of[...S.board]){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
+ for(const m of[...S.board].reverse()){const i=S.board.indexOf(m);if(!m||i<0||m.h<=0||!canAtk(m,i))continue;
   const al=[0,1,2].filter(j=>E.board[j]);if(!al.length)break;
   const at=atks(m).find(a=>act(a,i)),rg=at.r,j=at.mg?(E.board[i]?i:al[0]):rg?(i==1?[2,1,0]:[1,2,0]).find(x=>E.board[x]):al[0],t=E.board[j];
   const tx=hit(t,at.d,at.mg);let rx=null;if(!rg&&t.t>0)rx=hit(m,t.t);G.lg.push((k=='p'?'Bạn':'Địch')+': '+m.n+' đánh '+t.n+' ('+tx+')'+(rx?', gai '+rx:'')+(t.h<=0?' ☠️ '+t.n+' bị diệt':'')+(m.h<=0?' ☠️ '+m.n+' bị diệt':''));sfx(at.mg?'item':rg?'bow':'sword');setTimeout(()=>sfx(tx=='Chặn!'?'block':tx.includes('🛡️')?'shield':'hit'),130);if(rx)setTimeout(()=>sfx('thorn'),330);
