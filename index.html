@@ -218,7 +218,7 @@ const SND={
  arrow:()=>{tone(300,.15,'triangle',.05,.05,500);tone(900,.14,'triangle',.09,.15,300);noise(.06,.08,6000,.16);tone(260,.08,'square',.09,.39,150);noise(.06,.12,4500,.39)},
  orb:()=>{tone(400,.26,'sine',.07,0,1000);tone(600,.26,'triangle',.04,0,1500);noise(.3,.08,5000,.26);tone(900,.35,'sine',.06,.26,500);[880,1320,1760].forEach((f,x)=>tone(f,.3,'sine',.08,.64+x*.05));noise(.25,.12,5000,.64)}};
 function fx(k,i,t){const el=document.querySelector(`.slot[data-s="${k}"][data-i="${i}"]`);if(!el)return;const s=document.createElement('span');s.className='fl';s.textContent=t;el.appendChild(s);setTimeout(()=>s.remove(),1400)}
-let SH=0;function hit(x,d,mg){SH=0;if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;SH=a;return'-'+(d-a)}
+let SH=0;function hit(x,d,mg){SH=0;if(x.b>0){x.b--;return'Chặn!'}if(mg){x.h-=d;return'-'+d+' ✨'}const a=Math.min(x.s,d);x.s-=a;x.h-=d-a;SH=a;return'-'+d}
 const atks=m=>{const l=[{r:!!m.r,mg:!!m.mg,d:m.a}];if(m.r&&m.sw>0)l.push({r:false,d:m.sw});return l},act=(a,i)=>a.mg?true:a.r?i>0:i==0;
 const canAtk=(m,i)=>atks(m).some(a=>act(a,i));
 const compact=B=>{const a=B.filter(Boolean);while(a.length<3)a.push(null);B.splice(0,3,...a)};
