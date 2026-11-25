@@ -328,7 +328,7 @@ function vfx(m,at,k,i,ek,j){
  const bw=Math.max(20,Math.min(B.width,Math.max(A.x,T.x)+mg)-ox),bh=Math.max(20,Math.min(B.height,Math.max(A.y,T.y)+mg)-oy);
  const cv=document.createElement('canvas'),dp=Math.min(1.5,devicePixelRatio||1);
  cv.width=Math.max(1,bw*dp|0);cv.height=Math.max(1,bh*dp|0);
- cv.style.cssText=`position:absolute;left:${ox}px;top:${oy}px;width:${bw}px;height:${bh}px;pointer-events:none;z-index:${melee||kind=='arrow'?8:6}`;
+ cv.style.cssText=`position:absolute;left:${ox}px;top:${oy}px;width:${bw}px;height:${bh}px;pointer-events:none;z-index:8`;
  bd.appendChild(cv);
  const g=cv.getContext('2d'),sx=cv.width/bw,sy=cv.height/bh;
  g.setTransform(sx,0,0,sy,-ox*sx,-oy*sy);
