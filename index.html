@@ -206,7 +206,6 @@ const SKILLS=[
  {k:'x',n:'Bạo kích',ic:'🎯',num:true},
  {k:'v',n:'Hút máu',ic:'🩸',num:true},
  {k:'g',n:'Hồi khiên',ic:'🔰',num:true},
- {k:'p',n:'Hồi toàn đội',ic:'💞',num:true},
  {k:'lt',n:'Liên tiêu',ic:'🔁',num:false},
  {k:'pd',n:'Phản đòn',ic:'↩️',num:false}
 ];
@@ -379,7 +378,7 @@ const lvCard=(c,y,lv)=>{
 const atkName=c=>c.hl?'trị liệu':c.mg?'trượng':c.dc?'xúc xắc':c.r?'cung':'kiếm';
 const nextTxt=(c,y,lv)=>{
  if(y=='m'){
-  if(LVK[lv+1])return'Mở kỹ năng: '+(LVK[lv+1][c.n]||{}).t;
+  if(LVK[lv+1]){const u=LVK[lv+1][c.n]||{};return(u.f&&u.f.p?'Mở đòn đánh: ':'Mở kỹ năng: ')+u.t}
   const a=QB[lv]||{},b=QB[lv+1]||{},dh=(b.h||0)-(a.h||0),da=(b.a||0)-(a.a||0);
   return[da?'+'+da+' '+atkName(c):'',dh?'+'+dh+' máu':''].filter(Boolean).join(', ');
  }
@@ -452,7 +451,7 @@ function levelDiffText(c,y,lv){
    const d=(cur[k]||0)-(prev[k]||0);
    if(d)diffs.push(`+${d}${suf} ${lbl}`);
   }
-  if(LVK[lv]&&LVK[lv][c.n])diffs.push(`Mở kỹ năng: ${LVK[lv][c.n].t}`);
+  if(LVK[lv]&&LVK[lv][c.n])diffs.push(`${LVK[lv][c.n].f&&LVK[lv][c.n].f.p?'Mở đòn đánh':'Mở kỹ năng'}: ${LVK[lv][c.n].t}`);
  }else{
   const dv=(cur.v||0)-(prev.v||0);
   if(dv)diffs.push(`+${dv} ${KL[c.k]||'hiệu lực'}`);
@@ -691,7 +690,7 @@ const noteOf=m=>[
  m.x?`Bạo kích: +${m.x}% tỉ lệ chí mạng cho mọi đòn.`:'',
  m.v?`Hút máu: mỗi đòn trúng hồi ${m.v} máu.`:'',
  m.g?`Hồi khiên: cuối mỗi lượt hồi ${m.g} khiên (tối đa bằng khiên ban đầu).`:'',
- m.p?`Hồi toàn đội: tới lượt Hoa Đà, hồi toàn đội trước rồi mới trị liệu đơn mục tiêu; hồi ${m.p} máu cho mọi đồng minh bị thương (có hiệu ứng riêng).`:'',
+ m.p?`Hồi toàn đội (đòn đánh): tới lượt Hoa Đà, thực hiện đòn hồi toàn đội trước rồi mới trị liệu đơn mục tiêu; hồi ${m.p} máu cho mọi đồng minh bị thương.`:'',
  m.hl?'Trị liệu: tới lượt hành động của Hoa Đà, thay vì đánh địch sẽ hồi máu cho đồng minh bị thương (ưu tiên máu thấp nhất).':'',
  m.r&&!m.mg?'Tầm xa: đánh được từ hàng sau, không bị gai phản.':'',
  m.mg?'Phép thuật: sát thương bỏ qua khiên, 1% chí mạng.':'',
