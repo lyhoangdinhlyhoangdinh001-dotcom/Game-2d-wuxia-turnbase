@@ -388,7 +388,7 @@ const nextTxt=(c,y,lv)=>{
 
 const sk=m=>{const l=SKILLS.filter(k=>k.k!='s'&&m[k.k]>0).map(k=>`<u class="sk">${k.ic}${k.num?`<i>${m[k.k]}</i>`:''}</u>`);return[0,3,6].filter(i=>i<l.length).map(i=>`<em class="skr">${l.slice(i,i+3).join('')}</em>`).join('')};
 const hx=c=>{const l=SKILLS.filter(k=>c[k.k]>0);return`<span class="hxs">${l.map(k=>`<em class="hx sk">${k.ic}${k.num?`<i>${c[k.k]}</i>`:''}</em>`).join('')}</span>`};
-const cardIn=c=>`<span class="co">${c.c}</span>${c.y=='i'?`<span class="ty ${c.q=='p'?'ts':'te'}"></span>`:''}<i>${c.n}${c.lv>1?' ★'+c.lv:''}</i>${c.y=='m'?hx(c):c.k=='b'||c.k=='t'?hx({[c.k]:c.v,pd:c.k=='b'?1:0}):''}${c.y=='m'?`<u class="at${c.hl?' hl':''}${c.r?' rg':''}${c.mg?' mg':''}${c.dc?' dc':''}">${c.a}</u><u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd"><em class="si"></em><i>${c.v}</i></span>`:''}`;
+const cardIn=c=>`<span class="co">${c.c}</span>${c.y=='i'?`<span class="ty ${c.q=='p'?'ts':'te'}"></span>`:''}<i>${c.n}${c.lv>1?' ★'+c.lv:''}</i>${c.y=='m'?hx(c):c.k=='b'||c.k=='t'?hx({[c.k]:c.v,pd:c.k=='b'?1:0}):''}${c.y=='m'?`${atks(c).map((a,j)=>`<u class="at${a.hl?' hl':''}${a.team?' tm':''}${a.r?' rg':''}${a.mg?' mg':''}${a.dc?' dc':''}" style="bottom:calc((${-.5+j*6.4})*var(--u))">${a.d}</u>`).join('')}<u class="hp">${c.h}</u>`:c.k=='a'?`<u class="at">${c.v}</u>`:c.k=='h'?`<u class="at hl">${c.v}</u>`:c.k=='s'?`<span class="shd"><em class="si"></em><i>${c.v}</i></span>`:''}`;
 
 const colRow=(c,y)=>{
  const mx=y=='m'?MAXQ:MAXI,lv=lvOf(c,y),up=lv<mx,cost=up?(y=='m'?QC:IC)[lv-1]:0;
